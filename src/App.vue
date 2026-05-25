@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import CotPanel from "./components/CotPanel.vue";
+import Footer from "./components/Footer.vue";
 import MgrsReadout from "./components/MgrsReadout.vue";
 import StandardToggle from "./components/StandardToggle.vue";
 import SymbolPalette from "./components/SymbolPalette.vue";
@@ -15,6 +16,7 @@ import TacticalMap from "./components/TacticalMap.vue";
       <StandardToggle class="corner corner--bl" />
       <SymbolPalette class="corner corner--br" />
     </div>
+    <Footer class="footer" />
   </div>
 </template>
 <style scoped lang="scss">
@@ -24,7 +26,7 @@ import TacticalMap from "./components/TacticalMap.vue";
   height: 100%;
   .overlay {
     position: absolute;
-    inset: 0;
+    inset: 0 0 24px 0;
     pointer-events: none;
     .corner {
       position: absolute;
@@ -41,6 +43,13 @@ import TacticalMap from "./components/TacticalMap.vue";
     .corner--br {
       inset: auto 10px 10px auto;
     }
+  }
+  .footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 24px;
   }
 }
 </style>

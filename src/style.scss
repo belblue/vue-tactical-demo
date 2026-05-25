@@ -1,15 +1,20 @@
 :root {
   --bg: #0b0d10;
   --panel: #14181d;
-  --panel-border: #1f262e;
+  --panel-border: #4c5c6e;
+
   --text: #d7dee5;
   --text-dim: #8a95a1;
   --accent: #f59e0b; // amber — active states only
   --hostile: #d33;
   --friendly: #3b82f6;
+  --hover: #694200;
   --sans: system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
-
+  --padding-elements: 5px;
+  --gap-elements: 8px;
+  --border-radius: 5px;
+  --font-textarea: 12px;
   font: 14px/1.45 var(--sans);
   letter-spacing: 0.18px;
   color-scheme: dark;
@@ -37,23 +42,34 @@ body,
   width: 100%;
   overflow: hidden;
 }
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
 .panel {
   background-color: var(--panel);
   border: 1px solid var(--panel-border);
-  border-radius: 10px;
-  padding: 5px;
+  border-radius: var(--border-radius);
+  padding: 10px;
   pointer-events: auto;
 
   &__title {
-    font-size: 18px;
+    font-size: 16px;
     color: var(--text-dim);
   }
 }
 
 .btn {
-  background-color: transparent;
+  background-color: var(--bg);
   border: 1px solid var(--panel-border);
-  &--isActive {
+  border-radius: var(--border-radius);
+  padding: var(--padding-elements);
+  &.is-active,
+  &[aria-pressed="true"] {
     background-color: var(--accent);
+    color: var(--bg);
   }
 }
