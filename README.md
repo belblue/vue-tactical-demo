@@ -1,5 +1,25 @@
-# Vue 3 + TypeScript + Vite
+# vue-tactical-demo
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A weekend project demo: a dark tactical map with NATO military symbols, MGRS coordinate readout, and CoT (Cursor-on-Traget) XML parsing. Vue3 + TS + MapLibre GL.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## Stack
+
+- Vue 3.5 (`<script setup>`, `useTemplateRef`, `defineModel`)
+- TypeScript (strict)
+- Vite + SCSS
+- MapLibre GL, milsymbol, mgrs
+
+## Quick start
+
+\`\`\`bash
+npm install
+npm run dev # http://localhost:5173
+npm run build
+\`\`\`
+
+## Standards
+
+- **APP-6D** - NATO Joint Military Symbology (current)
+- **MIL-std-2525C** US DoD military symbology
+- **CoT** Cursor-on-Target XML interchange format
+- **MGRS** Military Grid Reference system

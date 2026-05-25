@@ -1,0 +1,59 @@
+:root {
+  --bg: #0b0d10;
+  --panel: #14181d;
+  --panel-border: #1f262e;
+  --text: #d7dee5;
+  --text-dim: #8a95a1;
+  --accent: #f59e0b; // amber — active states only
+  --hostile: #d33;
+  --friendly: #3b82f6;
+  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 14px/1.45 var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+.panel {
+  background-color: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  padding: 5px;
+  pointer-events: auto;
+
+  &__title {
+    font-size: 18px;
+    color: var(--text-dim);
+  }
+}
+
+.btn {
+  background-color: transparent;
+  border: 1px solid var(--panel-border);
+  &--isActive {
+    background-color: var(--accent);
+  }
+}
