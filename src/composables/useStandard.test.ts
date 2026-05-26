@@ -6,6 +6,7 @@ describe("useStandard", () => {
     const { setStandard } = useStandard();
     setStandard("APP6");
   });
+
   it("defaults to APP6", () => {
     const { currentStandard } = useStandard();
     expect(currentStandard.value).toBe("APP6");

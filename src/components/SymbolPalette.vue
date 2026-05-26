@@ -21,7 +21,7 @@ const renderedSymbols = computed(() =>
     sidc: sidc,
     svg: new ms.Symbol(sidc, {
       size: 18,
-      standard: currentStandard.value === "APP6" ? "APP6" : "2525C",
+      standard: currentStandard.value === "APP6" ? "APP6" : "2525",
     }).asSVG(),
   })),
 );
@@ -35,11 +35,11 @@ function arm(sidc: string): void {
   <div class="panel interactive symbol-palette__grid">
     <button
       class="symbol-palette__btn"
-      v-for="sidc in renderedSymbols"
-      :key="sidc.sidc"
-      v-html="sidc.svg"
-      @click="arm(sidc.sidc)"
-      :aria-pressed="armed === sidc.sidc"
+      v-for="{ sidc, svg } in renderedSymbols"
+      :key="sidc"
+      v-html="svg"
+      @click="arm(sidc)"
+      :aria-pressed="armed === sidc"
     />
   </div>
 </template>
@@ -57,7 +57,7 @@ function arm(sidc: string): void {
   cursor: pointer;
   &[aria-pressed="true"] {
     border-color: var(--accent);
-    background: rgba(245, 158, 11, 0.1);
+    background: var(--accent-bg);
   }
 }
 </style>
