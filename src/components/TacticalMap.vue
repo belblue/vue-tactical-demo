@@ -16,6 +16,27 @@ const DARK_STYLE =
 const mapRoot = useTemplateRef<HTMLDivElement>("map-root");
 let map: maplibregl.Map | null = null;
 
+function buildMarkerElement(sidc: string, callsign?: string): HTMLDivElement {
+  const wrapper = document.createElement("div");
+  wrapper.className = "tactical-marker";
+
+  if (callsign) {
+    const label = document.createElement("div");
+    label.className = "tactical-marker__label";
+    label.textContent = callsign;
+    wrapper.appendChild(label);
+  }
+
+  const svgSlot = document.createElement("div");
+  svgSlot.innerHTML = new ms.Symbol(sidc, {
+    size: 32,
+    standard: currentStandard.value === "APP6" ? "APP6" : "2525",
+  }).asSVG();
+
+  wrapper.appendChild(svgSlot);
+  return wrapper;
+}
+
 const markers = new Map<string, maplibregl.Marker>();
 
 onMounted(() => {
@@ -42,11 +63,7 @@ onMounted(() => {
       for (const symbol of placedList) {
         if (markers.has(symbol.id)) continue;
 
-        const el = document.createElement("div");
-        el.innerHTML = new ms.Symbol(symbol.sidc, {
-          size: 32,
-          standard: currentStandard.value === "APP6" ? "APP6" : "2525",
-        }).asSVG();
+        const el = buildMarkerElement(symbol.sidc, symbol.callsign);
         const marker = new maplibregl.Marker({ element: el })
           .setLngLat([symbol.lng, symbol.lat])
           .addTo(map);
@@ -62,10 +79,10 @@ watch(currentStandard, (newStandard) => {
   for (const symbol of placed.value) {
     const marker = markers.get(symbol.id);
     if (!marker) continue;
-    marker.getElement().innerHTML = new ms.Symbol(symbol.sidc, {
-      size: 32,
-      standard: newStandard === "APP6" ? "APP6" : "2525",
-    }).asSVG();
+
+    const newEl = buildMarkerElement(symbol.sidc, symbol.callsign);
+
+    marker.getElement().replaceChildren(...newEl.children);
   }
 });
 

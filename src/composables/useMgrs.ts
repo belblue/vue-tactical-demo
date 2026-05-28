@@ -21,7 +21,12 @@ export function useMgrs(mapRef: Ref<maplibregl.Map | null>) {
         mgrs.value = formatMgrs(forward([lng.value, lat.value], 5));
         visible.value = true;
       }
+
+      function handleLeave() {
+        visible.value = false;
+      }
       map.on("mousemove", handleMove);
+      map.on("mouseout", handleLeave);
 
       onWatcherCleanup(() => {
         map.off("mousemove", handleMove);

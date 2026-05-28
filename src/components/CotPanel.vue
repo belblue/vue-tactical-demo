@@ -4,7 +4,7 @@ import { SAMPLE_COT } from "../lib/sample-cot";
 import { useCot } from "../composables/useCot";
 import { usePlacedSymbols } from "../composables/usePlacedSymbols";
 
-const { status, parse, lastResult } = useCot();
+const { status, parse, lastResult, error } = useCot();
 const { add } = usePlacedSymbols();
 const xmlInput = ref<string>(SAMPLE_COT);
 
@@ -23,7 +23,13 @@ function handleParse() {
       <textarea class="cot-panel__textarea" v-model="xmlInput"></textarea>
       <button class="btn" @click="handleParse">Parse</button>
     </div>
-    <span v-show="status" class="cot-panel__status">{{ status }}</span>
+    <span
+      v-show="status"
+      class="cot-panel__status"
+      :class="{ 'cot-panel__status--error': error }"
+      aria-live="polite"
+      >{{ status }}</span
+    >
   </div>
 </template>
 <style scoped lang="scss">
@@ -46,6 +52,9 @@ function handleParse() {
   resize: vertical;
 }
 .cot-panel__status {
-  color: var(--accent);
+  color: var(--text);
+  &--error {
+    color: var(--hostile);
+  }
 }
 </style>
