@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import ms from "milsymbol";
 import { useStandard } from "../composables/useStandard";
-import { ref, computed } from "vue";
+import { computed } from "vue";
+import { usePlacedSymbols } from "../composables/usePlacedSymbols";
 
 const { currentStandard } = useStandard();
+const { arm, armedSidc } = usePlacedSymbols();
 
 const sidcs = [
   "SFGPUCI-----", // friendly infantry
@@ -25,11 +27,6 @@ const renderedSymbols = computed(() =>
     }).asSVG(),
   })),
 );
-const armed = ref<string | null>(null);
-
-function arm(sidc: string): void {
-  armed.value = armed.value === sidc ? null : sidc;
-}
 </script>
 <template>
   <div class="panel interactive symbol-palette__grid">
@@ -39,7 +36,7 @@ function arm(sidc: string): void {
       :key="sidc"
       v-html="svg"
       @click="arm(sidc)"
-      :aria-pressed="armed === sidc"
+      :aria-pressed="armedSidc === sidc"
     />
   </div>
 </template>

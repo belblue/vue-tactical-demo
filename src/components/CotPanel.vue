@@ -2,16 +2,26 @@
 import { ref } from "vue";
 import { SAMPLE_COT } from "../lib/sample-cot";
 import { useCot } from "../composables/useCot";
+import { usePlacedSymbols } from "../composables/usePlacedSymbols";
 
-const { status, parse } = useCot();
+const { status, parse, lastResult } = useCot();
+const { add } = usePlacedSymbols();
 const xmlInput = ref<string>(SAMPLE_COT);
+
+function handleParse() {
+  parse(xmlInput.value);
+  if (lastResult.value) {
+    const { sidc, lat, lng, callsign } = lastResult.value;
+    add({ sidc, lat, lng, callsign });
+  }
+}
 </script>
 <template>
   <div class="cot-panel panel interactive">
     <h2 class="panel__title">Cursor on Target</h2>
     <div class="cot-panel__input-row">
       <textarea class="cot-panel__textarea" v-model="xmlInput"></textarea>
-      <button class="btn" @click="parse(xmlInput)">Parse</button>
+      <button class="btn" @click="handleParse">Parse</button>
     </div>
     <span v-show="status" class="cot-panel__status">{{ status }}</span>
   </div>

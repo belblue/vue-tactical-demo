@@ -1,6 +1,6 @@
 import { ref } from "vue";
 
-export interface PlacedSymbols {
+export interface PlacedSymbol {
   id: string;
   sidc: string;
   lng: number;
@@ -8,15 +8,15 @@ export interface PlacedSymbols {
   callsign?: string;
 }
 
-const placed = ref<PlacedSymbols[]>([]);
+const placed = ref<PlacedSymbol[]>([]);
 const armedSidc = ref<string | null>(null);
 
-export function usePlacedSymbol() {
+export function usePlacedSymbols() {
   function arm(sidc: string) {
     armedSidc.value = armedSidc.value === sidc ? null : sidc;
   }
 
-  function add(symbol: Omit<PlacedSymbols, "id">) {
+  function add(symbol: Omit<PlacedSymbol, "id">) {
     placed.value.push({
       id: crypto.randomUUID(),
       ...symbol,
