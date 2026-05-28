@@ -75,7 +75,7 @@ onMounted(() => {
   );
 });
 
-watch(currentStandard, (newStandard) => {
+watch(currentStandard, () => {
   for (const symbol of placed.value) {
     const marker = markers.get(symbol.id);
     if (!marker) continue;
